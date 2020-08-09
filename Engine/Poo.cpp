@@ -17,9 +17,9 @@ void Poo::keepInFrame(int right, int bottom)
 	if (y + width >= bottom)
 		y = bottom - width - 1, vy = -vy;
 	if (x < 0)
-		x = width, vx = -vx;
+		x = 0, vx = -vx;
 	if (y < 0)
-		y = width, vy = -vy;
+		y = 0, vy = -vy;
 }
 
 void Poo::draw(Graphics& gfx) const

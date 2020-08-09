@@ -23,7 +23,7 @@ void Entity::keepInFrame(int right, int bottom)
 	if (y + width >= bottom)
 		y = bottom - width - 1, vy = 0;
 	if (x < 0)
-		x = width, vx = 0;
+		x = 0, vx = 0;
 	if (y < 0)
-		y = width, vy = 0;
+		y = 0, vy = 0;
 }
