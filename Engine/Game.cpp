@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	player(400, 300)
+	player(400.0f, 300.0f)
 {
 }
 
@@ -45,7 +45,7 @@ void Game::UpdateModel()
 	{
 		if (isStarted)
 		{
-			for (auto i = poos.size(); i < count; ++i)
+			for (size_t i = poos.size(); i < count; ++i)
 				addPoo();
 
 			keyPressed();
@@ -67,7 +67,7 @@ void Game::UpdateModel()
 
 			for (Poo& poo : poos)
 			{
-				poo.update(player.x, player.y);
+				poo.update();
 				poo.keepInFrame(gfx.ScreenWidth, gfx.ScreenHeight - 10);
 
 			}
@@ -98,8 +98,8 @@ void Game::ComposeFrame()
 void Game::addPoo()
 {
 	static std::default_random_engine seed(static_cast<unsigned int>(time(0)));
-	static std::uniform_int_distribution<int> randomX(0, gfx.ScreenWidth - Poo::width - 1);
-	static std::uniform_int_distribution<int> randomY(0, gfx.ScreenHeight - Poo::width - 1);
+	static std::uniform_real_distribution<float> randomX(0, gfx.ScreenWidth - Poo::width - 1);
+	static std::uniform_real_distribution<float> randomY(0, gfx.ScreenHeight - Poo::width - 1);
 	static std::uniform_int_distribution<int> color(150, 256);
 
 	int r = color(seed), g = color(seed), b = color(seed);
@@ -116,7 +116,7 @@ void Game::addPoo()
 			isDone = false;
 	}while (!isDone);
 
-	static std::uniform_int_distribution<int> randomVDir(-1, 1);
+	static std::uniform_real_distribution<float> randomVDir(-2.0f, 2.0f);
 
 	poo.vx = randomVDir(seed);
 	poo.vy = randomVDir(seed);

@@ -1,10 +1,10 @@
 #include "Poo.h"
 
-Poo::Poo(int x, int y) : Entity(x, y, Poo::width) {}
+Poo::Poo(float x, float y) : Entity(x, y, Poo::width) {}
 
-Poo::Poo(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, Poo::width) {}
+Poo::Poo(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Poo::width) {}
 
-void Poo::update(int x, int y) // the parameters are the coordinates 
+void Poo::update() // the parameters are the coordinates 
 							// of the player at the current location
 {
 	this->x += vx, this->y += vy;
@@ -13,9 +13,9 @@ void Poo::update(int x, int y) // the parameters are the coordinates
 void Poo::keepInFrame(int right, int bottom)
 {
 	if (x + width >= right)
-		x = right - width - 1, vx = -vx;
+		x = float(right - width - 1), vx = -vx;
 	if (y + width >= bottom)
-		y = bottom - width - 1, vy = -vy;
+		y = float(bottom - width - 1), vy = -vy;
 	if (x < 0)
 		x = 0, vx = -vx;
 	if (y < 0)
@@ -24,6 +24,8 @@ void Poo::keepInFrame(int right, int bottom)
 
 void Poo::draw(Graphics& gfx) const
 {
+	int x = int(this->x), y = int(this->y);
+
 	gfx.PutPixel(14 + x, 0 + y, 138, 77, 0);
 	gfx.PutPixel(7 + x, 1 + y, 138, 77, 0);
 	gfx.PutPixel(13 + x, 1 + y, 138, 77, 0);

@@ -5,10 +5,10 @@ class Poo :
 {
 public:
     Poo() = delete;
-    Poo(int x, int y);
-    Poo(int x, int y, int r, int g, int b);
+    Poo(float x, float y);
+    Poo(float x, float y, int r, int g, int b);
 
-    void update(int x, int y);
+    void update();
     void keepInFrame(int right, int bottom);
     void draw(Graphics& gfx) const override;
 

@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player(int x, int y) : Entity(x, y, Player::width) {}
+Player::Player(float x, float y) : Entity(x, y, Player::width) {}
 
-Player::Player(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, Player::width) {}
+Player::Player(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Player::width) {}
 
 void Player::update()
 {
@@ -12,6 +12,8 @@ void Player::update()
 
 void Player::draw(Graphics& gfx) const
 {
+	int x = int(this->x), y = int(this->y);
+
 	gfx.PutPixel(7 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(8 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(9 + x, 0 + y, 0, 0, 0);
