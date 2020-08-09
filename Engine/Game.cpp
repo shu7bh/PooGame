@@ -45,7 +45,7 @@ void Game::UpdateModel()
 	{
 		if (isStarted)
 		{
-			for (int i = poos.size(); i < count; ++i)
+			for (auto i = poos.size(); i < count; ++i)
 				addPoo();
 
 			keyPressed();
@@ -97,7 +97,7 @@ void Game::ComposeFrame()
 
 void Game::addPoo()
 {
-	static std::default_random_engine seed(time(0));
+	static std::default_random_engine seed(static_cast<unsigned int>(time(0)));
 	static std::uniform_int_distribution<int> randomX(0, gfx.ScreenWidth - Poo::width - 1);
 	static std::uniform_int_distribution<int> randomY(0, gfx.ScreenHeight - Poo::width - 1);
 	static std::uniform_int_distribution<int> color(150, 256);
