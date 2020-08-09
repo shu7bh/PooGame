@@ -28,6 +28,7 @@
 #include <vector>
 #include "Colors.h"
 #include "Draw.h"
+#include "Time.h"
 
 class Game
 {
@@ -56,4 +57,7 @@ private:
 	int count = 5;
 	int maxScore = 20;
 	bool isStarted = false, isEnded = false;
+
+	Time execTime;
+	float dt;
 };

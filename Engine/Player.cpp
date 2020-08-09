@@ -4,10 +4,9 @@ Player::Player(float x, float y) : Entity(x, y, Player::width) {}
 
 Player::Player(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Player::width) {}
 
-void Player::update()
+void Player::update(const float dt)
 {
-	x += vx;
-	y += vy;
+	x += vx * dt, y += vy * dt;
 }
 
 void Player::draw(Graphics& gfx) const

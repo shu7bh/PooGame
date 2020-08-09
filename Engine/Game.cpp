@@ -45,6 +45,7 @@ void Game::UpdateModel()
 	{
 		if (isStarted)
 		{
+			dt = execTime.getExecutionTime();
 			for (size_t i = poos.size(); i < count; ++i)
 				addPoo();
 
@@ -62,12 +63,12 @@ void Game::UpdateModel()
 				}
 
 
-			player.update();
+			player.update(dt);
 			player.keepInFrame(gfx.ScreenWidth, gfx.ScreenHeight - 10);
 
 			for (Poo& poo : poos)
 			{
-				poo.update();
+				poo.update(dt);
 				poo.keepInFrame(gfx.ScreenWidth, gfx.ScreenHeight - 10);
 
 			}
@@ -116,7 +117,7 @@ void Game::addPoo()
 			isDone = false;
 	}while (!isDone);
 
-	static std::uniform_real_distribution<float> randomVDir(-2.0f, 2.0f);
+	static std::uniform_real_distribution<float> randomVDir(-2.0f * 60.0f, 2.0f * 60.0f);
 
 	poo.vx = randomVDir(seed);
 	poo.vy = randomVDir(seed);
@@ -128,28 +129,28 @@ void Game::keyPressed()
 {
 	if (wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed('W'))
 		if (!player.inhibitUp)
-			player.vy -= 1, player.inhibitUp = true;
+			player.vy -= 60.0f, player.inhibitUp = true;
 		else;
 	else
 		player.inhibitUp = false;
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN) || wnd.kbd.KeyIsPressed('S'))
 		if (!player.inhibitDown)
-			player.vy += 1, player.inhibitDown = true;
+			player.vy += 60.0f, player.inhibitDown = true;
 		else;
 	else
 		player.inhibitDown = false;
 
 	if (wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed('A'))
 		if (!player.inhibitLeft)
-			player.vx -= 1, player.inhibitLeft = true;
+			player.vx -= 60.0f, player.inhibitLeft = true;
 		else;
 	else
 		player.inhibitLeft = false;
 
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT) || wnd.kbd.KeyIsPressed('D'))
 		if (!player.inhibitRight)
-			player.vx += 1, player.inhibitRight = true;
+			player.vx += 60.0f, player.inhibitRight = true;
 		else;
 	else
 		player.inhibitRight = false;

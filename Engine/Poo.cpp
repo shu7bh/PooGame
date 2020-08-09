@@ -4,10 +4,10 @@ Poo::Poo(float x, float y) : Entity(x, y, Poo::width) {}
 
 Poo::Poo(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Poo::width) {}
 
-void Poo::update() // the parameters are the coordinates 
+void Poo::update(const float dt) // the parameters are the coordinates 
 							// of the player at the current location
 {
-	this->x += vx, this->y += vy;
+	this->x += vx * dt, this->y += vy * dt;
 }
 
 void Poo::keepInFrame(int right, int bottom)

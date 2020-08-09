@@ -8,7 +8,7 @@ public:
     Player() = delete;
     Player(float x, float y);
     Player(float x, float y, int r, int g, int b);
-    void update();
+    void update(const float dt);
 
     void draw(Graphics& gfx) const override;
     int score = 0;
