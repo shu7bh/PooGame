@@ -29,6 +29,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	player(400.0f, 300.0f)
 {
+	dt = execTime.getExecutionTime();
 }
 
 void Game::Go()
