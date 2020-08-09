@@ -27,6 +27,7 @@
 #include "Player.h"
 #include <vector>
 #include "Colors.h"
+#include "Draw.h"
 
 class Game
 {
@@ -42,20 +43,15 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	bool checkCollision(const Entity& player, const Entity& poo);
 	void addPoo();
 	void keyPressed();
-	void drawStarted(int x, int y);
-	void drawEnded(int x, int y);
-	void drawProgressBar();
-	void drawCircle(const int x, const int y, const int r, const Color c);
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-	Player player = Player(400, 300);
+	Player player;
 	std::vector<Poo> poos;
 	int count = 5;
 	int maxScore = 20;

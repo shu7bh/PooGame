@@ -11,5 +11,7 @@ public:
     void update(int x, int y);
     void keepInFrame(int right, int bottom);
     void draw(Graphics& gfx) const override;
+
+    static constexpr int width = 24;
 };
 

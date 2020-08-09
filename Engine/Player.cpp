@@ -1,19 +1,17 @@
 #include "Player.h"
 
-Player::Player(int x, int y) : Entity(x, y, 10) {}
+Player::Player(int x, int y) : Entity(x, y, Player::width) {}
 
-Player::Player(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, 10) {}
+Player::Player(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, Player::width) {}
 
 void Player::update()
 {
 	x += vx;
 	y += vy;
-	calculateEdges();
 }
 
 void Player::draw(Graphics& gfx) const
 {
-	int x = left, y = top;
 	gfx.PutPixel(7 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(8 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(9 + x, 0 + y, 0, 0, 0);

@@ -12,5 +12,7 @@ public:
 
     void draw(Graphics& gfx) const override;
     int score = 0;
+
+    static constexpr int width = 20;
 };
 

@@ -1,34 +1,29 @@
 #include "Poo.h"
 
-Poo::Poo(int x, int y) : Entity(x, y, 12) {}
+Poo::Poo(int x, int y) : Entity(x, y, Poo::width) {}
 
-Poo::Poo(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, 12) {}
+Poo::Poo(int x, int y, int r, int g, int b) : Entity(x, y, r, g, b, Poo::width) {}
 
 void Poo::update(int x, int y) // the parameters are the coordinates 
 							// of the player at the current location
 {
 	this->x += vx, this->y += vy;
-	
-	calculateEdges();
 }
 
 void Poo::keepInFrame(int right, int bottom)
 {
-	if (this->right >= right)
+	if (x + width >= right)
 		x = right - width - 1, vx = -vx;
-	if (this->bottom >= bottom)
+	if (y + width >= bottom)
 		y = bottom - width - 1, vy = -vy;
-	if (left < 0)
+	if (x < 0)
 		x = width, vx = -vx;
-	if (top < 0)
+	if (y < 0)
 		y = width, vy = -vy;
-
-	calculateEdges();
 }
 
 void Poo::draw(Graphics& gfx) const
 {
-	int x = left, y = top;
 	gfx.PutPixel(14 + x, 0 + y, 138, 77, 0);
 	gfx.PutPixel(7 + x, 1 + y, 138, 77, 0);
 	gfx.PutPixel(13 + x, 1 + y, 138, 77, 0);
@@ -262,4 +257,3 @@ void Poo::draw(Graphics& gfx) const
 	gfx.PutPixel(6 + x, 23 + y, 51, 28, 0);
 
 }
-
