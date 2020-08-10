@@ -1,17 +1,48 @@
 #include "Player.h"
 
-Player::Player(float x, float y) : Entity(x, y, Player::width) {}
+Player::Player(Vec2D& coordinate) : Entity(coordinate, Player::width) {}
 
-Player::Player(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Player::width) {}
+Player::Player(Vec2D& coordinate, int r, int g, int b) : Entity(coordinate, r, g, b, Player::width) {}
 
 void Player::update(const float dt)
 {
-	x += vx * dt, y += vy * dt;
+	coordinate += velocity * dt;
+}
+
+void Player::keyPressed(MainWindow& wnd)
+{
+	if (wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed('W'))
+		if (!inhibitUp)
+			velocity.y -= 120.0f, inhibitUp = true;
+		else;
+	else
+		inhibitUp = false;
+
+	if (wnd.kbd.KeyIsPressed(VK_DOWN) || wnd.kbd.KeyIsPressed('S'))
+		if (!inhibitDown)
+			velocity.y += 120.0f, inhibitDown = true;
+		else;
+	else
+		inhibitDown = false;
+
+	if (wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed('A'))
+		if (!inhibitLeft)
+			velocity.x -= 120.0f, inhibitLeft = true;
+		else;
+	else
+		inhibitLeft = false;
+
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT) || wnd.kbd.KeyIsPressed('D'))
+		if (!inhibitRight)
+			velocity.x += 120.0f, inhibitRight = true;
+		else;
+	else
+		inhibitRight = false;
 }
 
 void Player::draw(Graphics& gfx) const
 {
-	int x = int(this->x), y = int(this->y);
+	int x = int(coordinate.x), y = int(coordinate.y);
 
 	gfx.PutPixel(7 + x, 0 + y, 0, 0, 0);
 	gfx.PutPixel(8 + x, 0 + y, 0, 0, 0);

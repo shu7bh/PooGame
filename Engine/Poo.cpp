@@ -1,30 +1,30 @@
 #include "Poo.h"
 
-Poo::Poo(float x, float y) : Entity(x, y, Poo::width) {}
+Poo::Poo(Vec2D& coordinate) : Entity(coordinate, Poo::width) {}
 
-Poo::Poo(float x, float y, int r, int g, int b) : Entity(x, y, r, g, b, Poo::width) {}
+Poo::Poo(Vec2D& coordinate, int r, int g, int b) : Entity(coordinate, r, g, b, Poo::width) {}
 
 void Poo::update(const float dt) // the parameters are the coordinates 
 							// of the player at the current location
 {
-	this->x += vx * dt, this->y += vy * dt;
+	coordinate += velocity * dt;
 }
 
-void Poo::keepInFrame(int right, int bottom)
+void Poo::keepInFrame(Vec2D& vertice)
 {
-	if (x + width >= right)
-		x = float(right - width - 1), vx = -vx;
-	if (y + width >= bottom)
-		y = float(bottom - width - 1), vy = -vy;
-	if (x < 0)
-		x = 0, vx = -vx;
-	if (y < 0)
-		y = 0, vy = -vy;
+	if (coordinate.x + width >= vertice.x)
+		coordinate.x = float(vertice.x - width - 1), velocity.x = -velocity.x;
+	if (coordinate.y + width >= vertice.y)
+		coordinate.y = float(vertice.y - width - 1), velocity.y = -velocity.y;
+	if (coordinate.x < 0)
+		coordinate.x = 0, velocity.x = -velocity.x;
+	if (coordinate.y < 0)
+		coordinate.y = 0, velocity.y = -velocity.y;
 }
 
 void Poo::draw(Graphics& gfx) const
 {
-	int x = int(this->x), y = int(this->y);
+	int x = int(coordinate.x), y = int(coordinate.y);
 
 	gfx.PutPixel(14 + x, 0 + y, 138, 77, 0);
 	gfx.PutPixel(7 + x, 1 + y, 138, 77, 0);

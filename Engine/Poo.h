@@ -5,11 +5,11 @@ class Poo :
 {
 public:
     Poo() = delete;
-    Poo(float x, float y);
-    Poo(float x, float y, int r, int g, int b);
+    Poo(Vec2D& coordinate);
+    Poo(Vec2D& coordinate, int r, int g, int b);
 
     void update(const float dt);
-    void keepInFrame(int right, int bottom);
+    void keepInFrame(Vec2D& vertice);
     void draw(Graphics& gfx) const override;
 
     static constexpr int width = 24;

@@ -45,7 +45,6 @@ private:
 	/*  User Functions              */
 	/********************************/
 	void addPoo();
-	void keyPressed();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
