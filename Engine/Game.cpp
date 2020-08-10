@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	player(400.0f, 300.0f)
+	player(Vec2D(400.0f, 300.0f))
 {
 	dt = execTime.getExecutionTime();
 }
@@ -50,7 +50,7 @@ void Game::UpdateModel()
 			for (size_t i = poos.size(); i < count; ++i)
 				addPoo();
 
-			keyPressed();
+			player.keyPressed(wnd);
 
 
 			for (auto it = poos.begin(); it != poos.end(); ++it)
@@ -65,13 +65,13 @@ void Game::UpdateModel()
 
 
 			player.update(dt);
-			player.keepInFrame(gfx.ScreenWidth, gfx.ScreenHeight - 10);
+			player.keepInFrame(Vec2D(gfx.ScreenWidth, gfx.ScreenHeight - 10));
 
 			for (Poo& poo : poos)
 			{
 				poo.update(dt);
-				poo.keepInFrame(gfx.ScreenWidth, gfx.ScreenHeight - 10);
-
+				poo.keepInFrame(Vec2D(gfx.ScreenWidth, gfx.ScreenHeight - 10)); // The 10 px as
+													// the progress bar is shown at the bottom
 			}
 		}
 		else if (wnd.kbd.KeyIsPressed(VK_RETURN))
@@ -106,11 +106,11 @@ void Game::addPoo()
 
 	int r = color(seed), g = color(seed), b = color(seed);
 	bool isDone;
-	Poo poo(randomX(seed), randomY(seed), r, g, b);
+	Poo poo(Vec2D(randomX(seed), randomY(seed)), r, g, b);
 	do
 	{
 		isDone = true;
-		poo.x = randomX(seed), poo.y = randomY(seed);
+		poo.coordinate.set(randomX(seed), randomY(seed));
 		for (const auto& oldPoo : poos)
 			if (Entity::checkCollision(oldPoo, poo))
 				isDone = false;
@@ -118,41 +118,9 @@ void Game::addPoo()
 			isDone = false;
 	}while (!isDone);
 
-	static std::uniform_real_distribution<float> randomVDir(-2.0f * 60.0f, 2.0f * 60.0f);
+	static std::uniform_real_distribution<float> randomVDir(-3.0f * 60.0f, 3.0f * 60.0f);
 
-	poo.vx = randomVDir(seed);
-	poo.vy = randomVDir(seed);
+	poo.velocity.set(randomVDir(seed), randomVDir(seed));
 
 	poos.push_back(poo);
-}
-
-void Game::keyPressed()
-{
-	if (wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed('W'))
-		if (!player.inhibitUp)
-			player.vy -= 60.0f, player.inhibitUp = true;
-		else;
-	else
-		player.inhibitUp = false;
-
-	if (wnd.kbd.KeyIsPressed(VK_DOWN) || wnd.kbd.KeyIsPressed('S'))
-		if (!player.inhibitDown)
-			player.vy += 60.0f, player.inhibitDown = true;
-		else;
-	else
-		player.inhibitDown = false;
-
-	if (wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed('A'))
-		if (!player.inhibitLeft)
-			player.vx -= 60.0f, player.inhibitLeft = true;
-		else;
-	else
-		player.inhibitLeft = false;
-
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT) || wnd.kbd.KeyIsPressed('D'))
-		if (!player.inhibitRight)
-			player.vx += 60.0f, player.inhibitRight = true;
-		else;
-	else
-		player.inhibitRight = false;
 }

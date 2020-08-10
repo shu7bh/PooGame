@@ -151,6 +151,7 @@
     <ClInclude Include="Poo.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Vec2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Draw.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Poo.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Vec2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
