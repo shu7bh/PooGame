@@ -45,7 +45,6 @@ private:
 	/*  User Functions              */
 	/********************************/
 	void addPoo();
-	void keyPressed();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -55,7 +54,7 @@ private:
 	Player player;
 	std::vector<Poo> poos;
 	int count = 5;
-	int maxScore = 20;
+	int maxScore = 100;
 	bool isStarted = false, isEnded = false;
 
 	Time execTime;
