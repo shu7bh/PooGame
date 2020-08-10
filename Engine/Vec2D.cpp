@@ -19,3 +19,8 @@ Vec2D& Vec2D::operator+=(const Vec2D& rhs)
 {
 	return *this = *this + rhs;
 }
+
+void Vec2D::set(const float x, const float y)
+{
+	this->x = x, this->y = y;
+}

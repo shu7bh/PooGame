@@ -110,7 +110,7 @@ void Game::addPoo()
 	do
 	{
 		isDone = true;
-		poo.coordinate.x = randomX(seed), poo.coordinate.y = randomY(seed);
+		poo.coordinate.set(randomX(seed), randomY(seed));
 		for (const auto& oldPoo : poos)
 			if (Entity::checkCollision(oldPoo, poo))
 				isDone = false;
@@ -118,10 +118,9 @@ void Game::addPoo()
 			isDone = false;
 	}while (!isDone);
 
-	static std::uniform_real_distribution<float> randomVDir(-2.0f * 60.0f, 2.0f * 60.0f);
+	static std::uniform_real_distribution<float> randomVDir(-3.0f * 60.0f, 3.0f * 60.0f);
 
-	poo.velocity.x = randomVDir(seed);
-	poo.velocity.y = randomVDir(seed);
+	poo.velocity.set(randomVDir(seed), randomVDir(seed));
 
 	poos.push_back(poo);
 }
